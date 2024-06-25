@@ -26,7 +26,8 @@ const Login = function () {
       );
       const resJson = await response.json();
       localStorage.setItem("token", resJson.token);
-      navigate("/");
+      navigate("/blog");
+      window.location.reload();
     } catch (err) {
       setUsername("");
       setPassword("");
