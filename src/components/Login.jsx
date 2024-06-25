@@ -19,8 +19,8 @@ const Login = function () {
           },
           mode: "cors",
           body: JSON.stringify({
-            username: username,
-            password: password,
+            username,
+            password,
           }),
         }
       );
