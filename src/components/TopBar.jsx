@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import PropTypes from "prop-types";
 import { Data } from "./Page";
 import { useContext } from "react";
 
 const TopBar = function({ handleSidebarOpen }) {
   const { user } = useContext(Data);
+  const navigate = useNavigate();
 
   const handleClick = async function() {
     try {
@@ -18,6 +20,7 @@ const TopBar = function({ handleSidebarOpen }) {
         },
       );
       localStorage.removeItem("token");
+      navigate("/");
       window.location.reload();
     } catch (err) {
       console.log(err);
@@ -32,6 +35,10 @@ const TopBar = function({ handleSidebarOpen }) {
       {user ? <Link><button onClick={handleClick}>Log Out</button></Link> : <Link to="/login"><button>Log In</button></Link>}
     </div>
   )
+};
+
+TopBar.propTypes = {
+  handleSidebarOpen: PropTypes.func.isRequired,
 };
 
 export default TopBar;

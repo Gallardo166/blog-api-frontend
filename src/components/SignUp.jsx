@@ -66,9 +66,7 @@ const SignUp = function () {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
-        {errors
-          ? errors.map((error) => <p key={error.msg}>{error.msg}</p>)
-          : null}
+        {errors && errors.map((error) => <p key={error.msg}>{error.msg}</p>)}
         <button type="submit">Sign Up</button>
       </form>
     </div>

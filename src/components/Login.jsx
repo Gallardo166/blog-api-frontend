@@ -53,7 +53,7 @@ const Login = function () {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        {error ? <p>{error}</p> : null}
+        {error && <p>{error}</p>}
         <button type="submit">Log In</button>
       </form>
     </div>

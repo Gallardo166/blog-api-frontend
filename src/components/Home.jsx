@@ -9,7 +9,7 @@ const Home = function() {
     <>
       <h1>Galaxy Gazette</h1>
       <div>
-        {!user ?  <Link to="/signup"><button>Sign Up</button></Link> : null}
+        {!user &&  <Link to="/signup"><button>Sign Up</button></Link>}
         <Link to="/blog">Start reading {">"}</Link>
       </div>
     </>
