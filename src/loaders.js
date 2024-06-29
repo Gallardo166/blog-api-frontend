@@ -47,18 +47,31 @@ const blogLoader = async () => {
 
 const postLoader = async ({ params }) => {
   try {
-    const response = await fetch(
-      import.meta.env.DEV ? `http://localhost:3000/posts/${params.postid}` : "",
-      {
-        method: "GET",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
+    const [postResponse, commentsResponse] = await Promise.all([
+      fetch(
+        import.meta.env.DEV ? `http://localhost:3000/posts/${params.postid}` : "",
+        {
+          method: "GET",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          }
         }
-      }
-    );
-    throwError(response);
-    return response.json();
+      ),
+      fetch(
+        import.meta.env.DEV ? `http://localhost:3000/posts/${params.postid}/comments` : "",
+        {
+          method: "GET",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      ),
+    ]);
+    throwError(postResponse);
+    throwError(commentsResponse);
+    return {...await postResponse.json(), ...await commentsResponse.json()};
   } catch (err) {
     console.log(err);
     throw new Error(err + ", please try again.");

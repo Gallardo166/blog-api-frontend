@@ -10,7 +10,6 @@ const PostForm = function () {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const { categories } = useLoaderData();
 
-  console.log(selectedCategories);
   const handleToggleCheckbox = function(e) {
     if (e.target.checked) return setSelectedCategories([...selectedCategories, e.target.value]);
     const newSelectedCategories = selectedCategories.filter((category) => category !== e.target.value);
