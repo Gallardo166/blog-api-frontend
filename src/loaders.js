@@ -18,6 +18,7 @@ const pageLoader = async () => {
       return response.json();
     } catch (err) {
       console.log(err);
+      throw new Error(err + ", please try again.");
     }
   } else {
     return { user: null };
@@ -40,6 +41,7 @@ const blogLoader = async () => {
     return response.json();
   } catch (err) {
     console.log(err);
+    throw new Error(err + ", please try again.");
   }
 };
 
@@ -59,7 +61,28 @@ const postLoader = async ({ params }) => {
     return response.json();
   } catch (err) {
     console.log(err);
+    throw new Error(err + ", please try again.");
   }
 };
 
-export { pageLoader, blogLoader, postLoader }
+const postFormLoader = async () => {
+  try {
+    const response = await fetch(
+      import.meta.env.DEV ? `http://localhost:3000/categories` : "",
+      {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        }
+      }
+    );
+    throwError(response);
+    return response.json();
+  } catch (err) {
+    console.log(err);
+    throw new Error(err + ". please try again.");
+  }
+}
+
+export { pageLoader, blogLoader, postLoader, postFormLoader }
