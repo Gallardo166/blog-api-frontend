@@ -19,7 +19,7 @@ const Page = function() {
       <div className={styles.backgroundImage} />
       <div>
         <Sidebar user={user} categories={categories} handleSidebarOpen={handleSidebarOpen} sidebarOpen={sidebarOpen} />
-        <main>
+        <main className={styles.main}>
           <Data.Provider value={{ user, categories }}>
             <TopBar handleSidebarOpen={handleSidebarOpen} />
             <Outlet />

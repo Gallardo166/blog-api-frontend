@@ -4,6 +4,7 @@
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(50px);
+  z-index: 2;
 }
 
 .closed {
@@ -12,7 +13,7 @@
 }
 
 .open {
-  width: 64%;
+  width: 360px;
   transition: width 200ms ease-out;
 }
 

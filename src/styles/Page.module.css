@@ -5,6 +5,18 @@
   top: 0;
   background-image: url("/images/galaxy-background.jpg");
   background-size: cover;
-  background-position: 50% 70%;
+  background-position: 50% 80%;
   z-index: -1;
+}
+
+.main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 800px) {
+  .backgroundImage {
+    background-position: url();
+  }
 }

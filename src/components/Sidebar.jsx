@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import Icon from "@mdi/react";
+import { mdiClose } from "@mdi/js";
 import styles from "../styles/Sidebar.module.css";
 
 const Sidebar = function ({ user, categories, handleSidebarOpen, sidebarOpen }) {
@@ -21,7 +23,7 @@ const Sidebar = function ({ user, categories, handleSidebarOpen, sidebarOpen }) 
 
   return (
     <nav className={`${styles.sidebar} ${sidebarOpen ? styles.open : styles.closed}`}>
-      <button className={styles.closeButton} onClick={handleSidebarOpen}>x</button>
+      <button className={styles.closeButton} onClick={handleSidebarOpen}><Icon path={mdiClose} size={1.2} /></button>
       <div className={styles.sidebarContainer}>
         <Link to={user ? "/blog" : "/"} onClick={handleSidebarOpen}>Home</Link>
         <p className={styles.categories}>Categories:</p>

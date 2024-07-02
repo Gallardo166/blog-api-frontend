@@ -1,0 +1,39 @@
+.topBar {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.openButton, .logInButton {
+  font-family: libre-baskerville;
+  font-size: 1rem;
+  background: none;
+  outline: none;
+  border: none;
+  color:white;
+  transition: color 200ms ease-in-out;
+}
+
+.openButton:hover, .mainLogo:hover, .logInButton:hover {
+  cursor: pointer;
+}
+
+.logInButton:hover {
+  text-decoration: underline;
+}
+
+.mainLogo {
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (min-width: 800px) {
+  .topBar {
+    padding: 16px 36px;
+  }
+
+  .openButton, .logInButton {
+    transform: scale(130%);
+  }
+}
