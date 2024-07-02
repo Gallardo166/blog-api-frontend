@@ -1,4 +1,4 @@
-import { blogLoader, pageLoader, postLoader } from "./loaders";
+import { blogLoader, pageLoader, postLoader, profileLoader } from "./loaders";
 import Page from "./components/Page";
 import Home from "./components/Home";
 import Error from "./components/Error";
@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import Blog from "./components/Blog";
 import Post from "./components/Post";
 import PostForm from "./components/PostForm";
+import Profile from "./components/Profile";
 
 const routes = [
   {
@@ -21,6 +22,7 @@ const routes = [
       { path: "/blog", element: <Blog />, loader: blogLoader },
       { path: "/blog/categories/:categoryid", element: <Blog />, loader: blogLoader },
       { path: "/blog/:postid", element: <Post />, loader: postLoader },
+      { path: "/profile/:userid", element: <Profile />, loader: profileLoader },
       { path: "/author/post", element: <PostForm /> },
     ],
   },

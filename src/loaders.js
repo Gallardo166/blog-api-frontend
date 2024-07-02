@@ -94,4 +94,28 @@ const postLoader = async ({ params }) => {
   }
 };
 
-export { pageLoader, blogLoader, postLoader }
+const profileLoader = async function({ params }) {
+  const token = localStorage.getItem("token");
+  if (token) {
+    try {
+      const response = await fetch(
+        import.meta.env.DEV ? `http://localhost:3000/users/${params.userid}/comments` : "",
+        {
+          method: "GET",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `bearer ${token}`,
+          }
+        },
+      );
+      throwError(response);
+      return response.json();
+    } catch (err) {
+      console.log(err);
+      throw new Error(err + ", please try again.");
+    }
+  }
+};
+
+export { pageLoader, blogLoader, postLoader, profileLoader }
