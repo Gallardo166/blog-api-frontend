@@ -26,7 +26,7 @@ const TopBar = function({ handleSidebarOpen }) {
   }
 
   return(
-    <div>
+    <section>
       <button onClick={handleSidebarOpen}>
         <img src="/images/menu.svg" alt="" width="64px" />
       </button>
@@ -34,12 +34,13 @@ const TopBar = function({ handleSidebarOpen }) {
         <img src="/images/reading-astronaut.png" alt="" width="64px"/>
       </Link>
       {user ? <Link><button onClick={handleClick}>Log Out</button></Link> : <Link to="/login"><button>Log In</button></Link>}
-    </div>
+    </section>
   )
 };
 
 TopBar.propTypes = {
   handleSidebarOpen: PropTypes.func.isRequired,
+  sidebarOpen: PropTypes.bool.isRequired,
 };
 
 export default TopBar;

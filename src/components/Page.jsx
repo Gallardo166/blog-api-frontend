@@ -2,6 +2,7 @@ import { useState, createContext } from "react";
 import Sidebar from "./Sidebar";
 import TopBar from "./TopBar";
 import { Outlet, useLoaderData } from "react-router-dom";
+import styles from "../styles/Page.module.css";
 
 export const Data = createContext({});
 
@@ -15,13 +16,16 @@ const Page = function() {
 
   return(
     <>
-      {sidebarOpen && (<Sidebar user={user} categories={categories} />)}
-      <main>
-        <Data.Provider value={{ user, categories }}>
-          <TopBar handleSidebarOpen={handleSidebarOpen} />
-          <Outlet />
-        </Data.Provider>
-      </main>
+      <div className={styles.backgroundImage} />
+      <div>
+        <Sidebar user={user} categories={categories} handleSidebarOpen={handleSidebarOpen} sidebarOpen={sidebarOpen} />
+        <main>
+          <Data.Provider value={{ user, categories }}>
+            <TopBar handleSidebarOpen={handleSidebarOpen} />
+            <Outlet />
+          </Data.Provider>
+        </main>
+      </div>
     </>
   )
 }

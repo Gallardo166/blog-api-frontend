@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import styles from "../styles/Sidebar.module.css";
 
-const Sidebar = function ({ user, categories }) {
+const Sidebar = function ({ user, categories, handleSidebarOpen, sidebarOpen }) {
   const handleClick = async function () {
     try {
       await fetch(import.meta.env.DEV ? "http://localhost:3000/logout" : "", {
@@ -19,27 +20,37 @@ const Sidebar = function ({ user, categories }) {
   };
 
   return (
-    <nav>
-      <Link to={user ? "/blog" : "/"}>Home</Link>
-      <Link to="/categories">Categories</Link>
-      {categories &&
-        categories.map((category) => (
-          <Link key={category._id} to={`/blog/categories/${category._id}`}>
-            {category.name}
-          </Link>
-        ))}
-      <Link to="/about">About</Link>
-      {user ? (
-        <>
-          <Link to={`/profile/${user._id}`}>Profile</Link>
-          <button onClick={(e) => handleClick(e)}>Log Out</button>
-        </>
-      ) : (
-        <>
-          <Link to="/login">Log In</Link>
-          <Link to="/signup">Sign Up</Link>
-        </>
-      )}
+    <nav className={`${styles.sidebar} ${sidebarOpen ? styles.open : styles.closed}`}>
+      <button className={styles.closeButton} onClick={handleSidebarOpen}>x</button>
+      <div className={styles.sidebarContainer}>
+        <Link to={user ? "/blog" : "/"} onClick={handleSidebarOpen}>Home</Link>
+        <p className={styles.categories}>Categories:</p>
+        <div className={styles.categoriesContainer}>
+          {categories &&
+            categories.map((category) => (
+              <Link key={category._id} to={`/blog/categories/${category._id}`} onClick={handleSidebarOpen}>
+                {category.name}
+              </Link>
+            ))}
+        </div>
+        <Link to="/about" onClick={handleSidebarOpen}>About</Link>
+        {user ? (
+          <>
+            <Link to={`/profile/${user._id}`} onClick={handleSidebarOpen}>Profile</Link>
+            <button onClick={(e) => {
+              handleClick(e);
+              handleSidebarOpen();
+            }}>
+              Log Out
+            </button>
+          </>
+        ) : (
+          <>
+            <Link to="/login" onClick={handleSidebarOpen}>Log In</Link>
+            <Link to="/signup" onClick={handleSidebarOpen}>Sign Up</Link>
+          </>
+        )}
+      </div>
     </nav>
   );
 };
@@ -55,6 +66,8 @@ Sidebar.propTypes = {
       _id: PropTypes.string.isRequired,
     })
   ),
+  handleSidebarOpen: PropTypes.func.isRequired,
+  sidebarOpen: PropTypes.bool.isRequired,
 };
 
 export default Sidebar;

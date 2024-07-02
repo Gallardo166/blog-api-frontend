@@ -5,7 +5,7 @@ const Error = function() {
   
   return(
     <>
-      {error ? <p>{error.message}</p>: <p>Are you lost?</p>}
+      {error.status === 404 ? <p>Are you lost?</p> : <p>{error.message}</p>}
     </>
   )
 };
