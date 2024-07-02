@@ -7,7 +7,7 @@ export const Data = createContext({});
 
 const Page = function() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { user } = useLoaderData();
+  const { user, categories } = useLoaderData();
 
   const handleSidebarOpen = function() {
     setSidebarOpen(!sidebarOpen);
@@ -15,7 +15,7 @@ const Page = function() {
 
   return(
     <>
-      {sidebarOpen && (<Sidebar />)}
+      {sidebarOpen && (<Sidebar user={user} categories={categories} />)}
       <main>
         <Data.Provider value={{ setSidebarOpen, user }}>
           <TopBar handleSidebarOpen={handleSidebarOpen} />

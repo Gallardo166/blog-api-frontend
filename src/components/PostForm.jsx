@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Data } from "./Page";
 
 const PostForm = function () {
   const [title, setTitle] = useState("");
@@ -8,7 +8,7 @@ const PostForm = function () {
   const [file, setFile] = useState(null);
   const [errors, setErrors] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const { categories } = useLoaderData();
+  const { categories } = useContext(Data);
 
   const handleToggleCheckbox = function(e) {
     if (e.target.checked) return setSelectedCategories([...selectedCategories, e.target.value]);

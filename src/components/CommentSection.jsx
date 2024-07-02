@@ -25,7 +25,7 @@ const CommentSection = function ({ postid, comments }) {
           }),
         },
       );
-      window.location.reload();
+      location.reload();
     } catch (err) {
       console.log(err);
     }

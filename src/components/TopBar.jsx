@@ -1,11 +1,10 @@
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import PropTypes from "prop-types";
 import { Data } from "./Page";
 import { useContext } from "react";
 
 const TopBar = function({ handleSidebarOpen }) {
   const { user } = useContext(Data);
-  const navigate = useNavigate();
 
   const handleClick = async function() {
     try {
@@ -20,8 +19,7 @@ const TopBar = function({ handleSidebarOpen }) {
         },
       );
       localStorage.removeItem("token");
-      navigate("/");
-      window.location.reload();
+      location.replace("/");
     } catch (err) {
       console.log(err);
     }
@@ -30,8 +28,11 @@ const TopBar = function({ handleSidebarOpen }) {
   return(
     <div>
       <button onClick={() => handleSidebarOpen()}>
-        <img src="/images/reading-astronaut.png" alt="" width="64px"/>
+        <img src="/images/menu.svg" alt="" width="64px" />
       </button>
+      <Link>
+        <img src="/images/reading-astronaut.png" alt="" width="64px"/>
+      </Link>
       {user ? <Link><button onClick={handleClick}>Log Out</button></Link> : <Link to="/login"><button>Log In</button></Link>}
     </div>
   )

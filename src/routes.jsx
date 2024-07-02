@@ -1,4 +1,4 @@
-import { blogLoader, pageLoader, postLoader, postFormLoader } from "./loaders";
+import { blogLoader, pageLoader, postLoader } from "./loaders";
 import Page from "./components/Page";
 import Home from "./components/Home";
 import Error from "./components/Error";
@@ -20,7 +20,7 @@ const routes = [
       { path: "/login", element: <Login /> },
       { path: "/blog", element: <Blog />, loader: blogLoader },
       { path: "/blog/:postid", element: <Post />, loader: postLoader },
-      { path: "/author/post", element: <PostForm />, loader: postFormLoader },
+      { path: "/author/post", element: <PostForm /> },
     ],
   },
 ];

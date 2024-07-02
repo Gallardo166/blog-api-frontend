@@ -1,11 +1,9 @@
 import { useState } from "react"; 
-import { useNavigate } from "react-router-dom";
 
 const Login = function () {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate();
 
   const handleSubmit = async function (e) {
     e.preventDefault();
@@ -26,8 +24,7 @@ const Login = function () {
       );
       const resJson = await response.json();
       localStorage.setItem("token", resJson.token);
-      navigate("/blog");
-      window.location.reload();
+      location.replace("/blog");
     } catch (err) {
       setUsername("");
       setPassword("");

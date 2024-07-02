@@ -2,6 +2,7 @@ import throwError from "./throwError";
 
 const pageLoader = async () => {
   const token = localStorage.getItem("token");
+  let user = null;
   if (token) {
     try {  
       const response = await fetch(
@@ -15,13 +16,28 @@ const pageLoader = async () => {
         }
       );
       throwError(response);
-      return response.json();
+      const resJson =  await response.json();
+      user = resJson.user;
     } catch (err) {
       console.log(err);
       throw new Error(err + ", please try again.");
     }
-  } else {
-    return { user: null };
+  }
+  try {
+    const response = await fetch(
+      import.meta.env.DEV ? "http://localhost:3000/categories" : null, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    throwError(response);
+    return {...{user}, ...await response.json()}
+  } catch (err) {
+    console.log(err);
+    throw new Error(err + ", please try again.")
   }
 }
 
@@ -78,24 +94,4 @@ const postLoader = async ({ params }) => {
   }
 };
 
-const postFormLoader = async () => {
-  try {
-    const response = await fetch(
-      import.meta.env.DEV ? `http://localhost:3000/categories` : "",
-      {
-        method: "GET",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        }
-      }
-    );
-    throwError(response);
-    return response.json();
-  } catch (err) {
-    console.log(err);
-    throw new Error(err + ". please try again.");
-  }
-}
-
-export { pageLoader, blogLoader, postLoader, postFormLoader }
+export { pageLoader, blogLoader, postLoader }
