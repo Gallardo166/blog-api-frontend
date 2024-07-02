@@ -27,10 +27,10 @@ const TopBar = function({ handleSidebarOpen }) {
 
   return(
     <div>
-      <button onClick={() => handleSidebarOpen()}>
+      <button onClick={handleSidebarOpen}>
         <img src="/images/menu.svg" alt="" width="64px" />
       </button>
-      <Link>
+      <Link to={user ? "/blog" : "/"}>
         <img src="/images/reading-astronaut.png" alt="" width="64px"/>
       </Link>
       {user ? <Link><button onClick={handleClick}>Log Out</button></Link> : <Link to="/login"><button>Log In</button></Link>}

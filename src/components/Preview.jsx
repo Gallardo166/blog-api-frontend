@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 const Preview = function({ post }) {
   const navigate = useNavigate();
-  console.log(post);
 
   return(
     <div onClick={() => {

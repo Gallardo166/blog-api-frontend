@@ -17,7 +17,7 @@ const Page = function() {
     <>
       {sidebarOpen && (<Sidebar user={user} categories={categories} />)}
       <main>
-        <Data.Provider value={{ setSidebarOpen, user }}>
+        <Data.Provider value={{ user, categories }}>
           <TopBar handleSidebarOpen={handleSidebarOpen} />
           <Outlet />
         </Data.Provider>

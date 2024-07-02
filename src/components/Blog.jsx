@@ -1,16 +1,28 @@
-import Preview from "./Preview";
-import { useLoaderData } from "react-router-dom";
+import PreviewList from "./PreviewList";
+import Categories from "./Categories";
+import { useLoaderData, useParams } from "react-router-dom";
 
-const Blog = function() {
+const Blog = function () {
   const { posts } = useLoaderData();
+  const { categoryid } = useParams();
 
-  return(
+  return (
     <div>
-      {posts && posts.map((post) => (
-        <Preview key={post._id} post={post} />
-      ))}
+      <Categories />
+      <PreviewList
+        posts={
+          categoryid
+            ? posts.filter(
+                (post) =>
+                  !!post.categories.find(
+                    (category) => category._id === categoryid
+                  )
+              )
+            : posts
+        }
+      />
     </div>
-  )
-}
+  );
+};
 
 export default Blog;

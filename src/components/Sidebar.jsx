@@ -24,11 +24,11 @@ const Sidebar = function ({ user, categories }) {
 
   return (
     <nav>
-      <Link to="/">Home</Link>
+      <Link to={user ? "/blog" : "/"}>Home</Link>
       <Link to="/categories">Categories</Link>
       {categories &&
         categories.map((category) => (
-          <Link key={category._id} to={`/categories/${category._id}`}>{category.name}</Link>
+          <Link key={category._id} to={`/blog/categories/${category._id}`}>{category.name}</Link>
         ))}
       <Link to="/about">About</Link>
       {user ? <button onClick={(e) => handleClick(e)}>Log Out</button> : <><Link to="/login">Log In</Link><Link to="/signup">Sign Up</Link></>}

@@ -19,6 +19,7 @@ const routes = [
       { path: "/signup", element: <SignUp /> },
       { path: "/login", element: <Login /> },
       { path: "/blog", element: <Blog />, loader: blogLoader },
+      { path: "/blog/categories/:categoryid", element: <Blog />, loader: blogLoader },
       { path: "/blog/:postid", element: <Post />, loader: postLoader },
       { path: "/author/post", element: <PostForm /> },
     ],
