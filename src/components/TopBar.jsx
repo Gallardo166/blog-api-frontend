@@ -30,10 +30,10 @@ const TopBar = function({ handleSidebarOpen }) {
 
   return(
     <section className={styles.topBar}>
-      <button className={styles.openButton} onClick={handleSidebarOpen}>
+      <button className={styles.openButton} onClick={() => handleSidebarOpen(true)}>
         <Icon path={mdiMenu} size={1.2} />
       </button>
-      <Link className={styles.mainLogo} to={user ? "/blog" : "/"}>
+      <Link className={styles.mainLogo} to={user ? "/blog" : "/"} onClick={() => handleSidebarOpen(false)}>
         <img src="/images/reading-astronaut.png" alt="" width="56px"/>
       </Link>
       {user ? <Link><button className={styles.logOutButton} onClick={handleClick}>Log Out</button></Link> : <Link to="/login"><button className={styles.logInButton}>Log In</button></Link>}

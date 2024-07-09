@@ -10,8 +10,8 @@ const Page = function() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { user, categories } = useLoaderData();
 
-  const handleSidebarOpen = function() {
-    setSidebarOpen(!sidebarOpen);
+  const handleSidebarOpen = function(bool) {
+    setSidebarOpen(bool);
   };
 
   return(

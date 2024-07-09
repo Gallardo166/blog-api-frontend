@@ -23,22 +23,22 @@ const Sidebar = function ({ user, categories, handleSidebarOpen, sidebarOpen }) 
 
   return (
     <nav className={`${styles.sidebar} ${sidebarOpen ? styles.open : styles.closed}`}>
-      <button className={styles.closeButton} onClick={handleSidebarOpen}><Icon path={mdiClose} size={1.2} /></button>
+      <button className={styles.closeButton} onClick={() => handleSidebarOpen(false)}><Icon path={mdiClose} size={1.2} /></button>
       <div className={styles.sidebarContainer}>
-        <Link to={user ? "/blog" : "/"} onClick={handleSidebarOpen}>Home</Link>
+        <Link to={user ? "/blog" : "/"} onClick={() => handleSidebarOpen(false)}>Home</Link>
         <p className={styles.categories}>Categories:</p>
         <div className={styles.categoriesContainer}>
           {categories &&
             categories.map((category) => (
-              <Link key={category._id} to={`/blog/categories/${category._id}`} onClick={handleSidebarOpen}>
+              <Link key={category._id} to={`/blog/categories/${category._id}`} onClick={() => handleSidebarOpen(false)}>
                 {category.name}
               </Link>
             ))}
         </div>
-        <Link to="/about" onClick={handleSidebarOpen}>About</Link>
+        <Link to="/about" onClick={() => handleSidebarOpen(false)}>About</Link>
         {user ? (
           <>
-            <Link to={`/profile/${user._id}`} onClick={handleSidebarOpen}>Profile</Link>
+            <Link to={`/profile/${user._id}`} onClick={() => handleSidebarOpen(false)}>Profile</Link>
             <button onClick={(e) => {
               handleClick(e);
               handleSidebarOpen();
@@ -48,8 +48,8 @@ const Sidebar = function ({ user, categories, handleSidebarOpen, sidebarOpen }) 
           </>
         ) : (
           <>
-            <Link to="/login" onClick={handleSidebarOpen}>Log In</Link>
-            <Link to="/signup" onClick={handleSidebarOpen}>Sign Up</Link>
+            <Link to="/login" onClick={() => handleSidebarOpen(false)}>Log In</Link>
+            <Link to="/signup" onClick={() => handleSidebarOpen(false)}>Sign Up</Link>
           </>
         )}
       </div>
