@@ -29,11 +29,17 @@ const TopBar = function({ handleSidebarOpen }) {
   }
 
   return(
-    <section className={styles.topBar}>
-      <button className={styles.openButton} onClick={() => handleSidebarOpen(true)}>
-        <Icon path={mdiMenu} size={1.2} />
+    <section className={styles.topBar} onClick={() => handleSidebarOpen(false)}>
+      <button className={styles.openButton} onClick={(e) => {
+        e.stopPropagation();
+        handleSidebarOpen(true);
+      }}>
+        <Icon path={mdiMenu} size={1.2} onClick={(e) => {
+          e.stopPropagation();
+          handleSidebarOpen(true)
+        }} />
       </button>
-      <Link className={styles.mainLogo} to={user ? "/blog" : "/"} onClick={() => handleSidebarOpen(false)}>
+      <Link className={styles.mainLogo} to={user ? "/blog" : "/"}>
         <img src="/images/reading-astronaut.png" alt="" width="56px"/>
       </Link>
       {user ? <Link><button className={styles.logOutButton} onClick={handleClick}>Log Out</button></Link> : <Link to="/login"><button className={styles.logInButton}>Log In</button></Link>}

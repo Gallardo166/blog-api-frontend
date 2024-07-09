@@ -22,7 +22,9 @@ const Page = function() {
         <main className={styles.main}>
           <Data.Provider value={{ user, categories }}>
             <TopBar handleSidebarOpen={handleSidebarOpen} />
-            <Outlet />
+            <div className={styles.pageContainer} onClick={() => handleSidebarOpen(false)}>
+              <Outlet />
+            </div>
           </Data.Provider>
         </main>
       </div>
