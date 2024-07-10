@@ -1,0 +1,53 @@
+.commentSection {
+  box-shadow: 0 -2px 16px #0a0a0a;
+  padding: 28px 20px;
+  background-color: #3b3b3b;
+}
+
+.commentInput {
+  margin-bottom: 36px;
+  display: flex;
+  gap: 8px;
+}
+
+.input {
+  border: none;
+  appearance: none;
+  outline: none;
+  border-bottom: 1.1px inset #858585;
+  background-color: #3b3b3b;
+  flex-grow: 1;
+  resize: none;
+  height: max-content;
+  font-family: libre-baskerville;
+}
+
+.input:focus {
+  border-bottom: 1.6px inset #bebebe;
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.cancel, .send {
+  font-family: libre-baskerville;
+  border-radius: 60px;
+  padding: 8px;
+  border: none;
+}
+
+.cancel {
+  background: none;
+}
+
+.cancel:hover {
+  background-color: #7a7a7a;
+  cursor: pointer;
+}
+
+.send:not(:disabled):hover {
+  background-color: rgb(166, 101, 216);
+  cursor: pointer;
+}

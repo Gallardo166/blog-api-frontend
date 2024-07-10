@@ -1,0 +1,23 @@
+.comment {
+  font-size: 0.9rem;
+}
+
+.top {
+  display: flex;
+  gap: 8px;
+}
+
+.username {
+  font-weight: 600;
+  margin: 4px 0;
+}
+
+.date {
+  color:rgb(169, 167, 167);
+  margin: 4px 0;
+}
+
+.body {
+  margin: 4px 0 24px 0;
+  white-space: pre-wrap;
+}

@@ -7,6 +7,7 @@
   justify-content: space-between;
   align-items: center;
   transition: background-color 400ms ease-out;
+  z-index: 1;
 }
 
 .openButton, .logInButton, .logOutButton {

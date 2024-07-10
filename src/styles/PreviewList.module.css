@@ -1,4 +1,6 @@
 .posts {
+  background-color: rgba(53, 53, 53, 0.4);
+  backdrop-filter: blur(6px);
   padding: 20px;
   display: flex;
   flex-wrap: wrap;

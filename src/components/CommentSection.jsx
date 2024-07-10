@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import Comment from "./Comment";
 import PropTypes from "prop-types";
 import { Data } from "./Page";
+import styles from "../styles/CommentSection.module.css";
 
 const CommentSection = function ({ postid, comments }) {
   const [commentBody, setCommentBody] = useState("");
@@ -32,12 +33,15 @@ const CommentSection = function ({ postid, comments }) {
   }
 
   return (
-    <section>
+    <section className={styles.commentSection}>
       {user ?
-        <>
-          <input type="text" value={commentBody} onChange={(e) => setCommentBody(e.target.value)} />
-          <button onClick={(e) => handleClick(e)} disabled={!commentBody}>Send</button>
-        </> :
+        <div className={styles.commentInput}>
+          <textarea className={styles.input} value={commentBody} placeholder="Write a comment..." onChange={(e) => setCommentBody(e.target.value)}></textarea>
+          <div className={styles.buttons}>
+            <button className={styles.cancel} onClick={() => setCommentBody("")}>Cancel</button>
+            <button className={styles.send} onClick={(e) => handleClick(e)} disabled={!commentBody}>Send</button>
+          </div>
+        </div> :
         <p>Log in to comment</p>
       }
       {comments.length ? (

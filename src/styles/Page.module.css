@@ -18,7 +18,6 @@
 
 .pageContainer {
   width: 100%;
-  padding-bottom: 190px;
   flex-grow: 1;
   align-self: center;
 }
