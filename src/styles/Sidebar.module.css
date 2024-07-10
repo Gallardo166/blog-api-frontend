@@ -13,7 +13,7 @@
 }
 
 .open {
-  width: 360px;
+  width: 340px;
   transition: width 200ms ease-out;
 }
 

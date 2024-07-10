@@ -13,6 +13,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 }
 
 .pageContainer {
@@ -20,6 +21,12 @@
   padding-bottom: 190px;
   flex-grow: 1;
   align-self: center;
+}
+
+.isPinned {
+  background-color: rgba(77, 77, 77, 0.4);
+  backdrop-filter: blur(16px);
+  transition: background-color 400ms ease-in;
 }
 
 @media screen and (min-width: 800px) {

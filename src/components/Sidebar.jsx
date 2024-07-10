@@ -39,12 +39,12 @@ const Sidebar = function ({ user, categories, handleSidebarOpen, sidebarOpen }) 
         {user ? (
           <>
             <Link to={`/profile/${user._id}`} onClick={() => handleSidebarOpen(false)}>Profile</Link>
-            <button onClick={(e) => {
+            <Link to="/" onClick={(e) => {
               handleClick(e);
               handleSidebarOpen();
             }}>
               Log Out
-            </button>
+            </Link>
           </>
         ) : (
           <>

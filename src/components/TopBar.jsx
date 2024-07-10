@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom"
 import PropTypes from "prop-types";
 import { Data } from "./Page";
-import { useContext } from "react";
+import { forwardRef, useContext } from "react";
 import Icon from "@mdi/react";
 import { mdiMenu } from "@mdi/js";
 import styles from "../styles/TopBar.module.css";
 
-const TopBar = function({ handleSidebarOpen }) {
+const TopBar = forwardRef(function TopBar({ handleSidebarOpen }, ref) {
   const { user } = useContext(Data);
 
   const handleClick = async function() {
@@ -29,7 +29,7 @@ const TopBar = function({ handleSidebarOpen }) {
   }
 
   return(
-    <section className={styles.topBar} onClick={() => handleSidebarOpen(false)}>
+    <section ref={ref} className={styles.topBar} onClick={() => handleSidebarOpen(false)}>
       <button className={styles.openButton} onClick={(e) => {
         e.stopPropagation();
         handleSidebarOpen(true);
@@ -42,10 +42,10 @@ const TopBar = function({ handleSidebarOpen }) {
       <Link className={styles.mainLogo} to={user ? "/blog" : "/"}>
         <img src="/images/reading-astronaut.png" alt="" width="56px"/>
       </Link>
-      {user ? <Link><button className={styles.logOutButton} onClick={handleClick}>Log Out</button></Link> : <Link to="/login"><button className={styles.logInButton}>Log In</button></Link>}
+      {user ? <Link to="/"><button className={styles.logOutButton} onClick={handleClick}>Log Out</button></Link> : <Link to="/login"><button className={styles.logInButton}>Log In</button></Link>}
     </section>
   )
-};
+});
 
 TopBar.propTypes = {
   handleSidebarOpen: PropTypes.func.isRequired,

@@ -7,7 +7,7 @@ const Blog = function () {
   const { categoryid } = useParams();
 
   return (
-    <div>
+    <section>
       <Categories />
       <PreviewList
         posts={
@@ -21,7 +21,7 @@ const Blog = function () {
             : posts
         }
       />
-    </div>
+    </section>
   );
 };
 

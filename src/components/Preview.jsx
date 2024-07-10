@@ -1,19 +1,19 @@
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
+import styles from "../styles/Preview.module.css";
 
-const Preview = function({ post }) {
+const Preview = function({ post, position }) {
   const navigate = useNavigate();
 
   return(
-    <div onClick={() => {
+    <div className={`${position === "single" ? styles.single : position === "left" ? styles.left : styles.right} ${styles.post}`} onClick={() => {
       navigate(`/blog/${post._id}`);
     }}>
-      <img src={post.imageurl} alt="" width="140px" />
-      <p>{post.title}</p>
-      <p>{post.subheader}</p>
-      {post.categories.map((category) => (
-        <p key={category._id}>{category.name}</p>
-      ))}
+      <img className={styles.image} src={post.imageurl} alt="" />
+      <div className={styles.text}>
+        <h1 className={styles.title}>{post.title}</h1>
+        <h2 className={styles.subheader}>{post.subheader}</h2>
+      </div>
     </div>
   )
 }
@@ -25,7 +25,8 @@ Preview.propTypes = {
     subheader: PropTypes.string.isRequired,
     categories: PropTypes.array.isRequired,
     imageurl: PropTypes.string.isRequired,
-  })
+  }),
+  position: PropTypes.string.isRequired,
 };
 
 export default Preview;
