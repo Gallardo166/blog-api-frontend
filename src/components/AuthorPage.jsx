@@ -57,7 +57,6 @@ const AuthorPage = function() {
             subheader: post.subheader,
             body: post.body,
             categories: JSON.stringify(post.categories),
-            isPublished: false,
           }),
         }
       );

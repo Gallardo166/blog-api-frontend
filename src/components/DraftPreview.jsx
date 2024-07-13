@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useContext } from "react";
 import { AuthorContext } from "./AuthorPage";
+import { Link } from "react-router-dom";
 
 const DraftPreview = function ({ post }) {
   const { handlePublishDraft, handleUnpublishDraft } = useContext(AuthorContext);
@@ -26,6 +27,7 @@ const DraftPreview = function ({ post }) {
       >
         {post.isPublished ? "Unpublish" : "Publish"}
       </button>
+      <Link to={`/author/edit/${post._id}`}>Edit</Link>
     </div>
   );
 };
@@ -42,6 +44,7 @@ DraftPreview.propTypes = {
     ).isRequired,
     imageurl: PropTypes.string.isRequired,
     isPublished: PropTypes.bool.isRequired,
+    _id: PropTypes.string.isRequired,
   }),
 };
 

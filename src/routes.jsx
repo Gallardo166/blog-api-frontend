@@ -10,6 +10,7 @@ import PostForm from "./components/PostForm";
 import Profile from "./components/Profile";
 import AuthorPage from "./components/AuthorPage";
 import DraftList from "./components/DraftList";
+import EditPostPage from "./components/EditPostPage";
 
 const routes = [
   {
@@ -29,7 +30,8 @@ const routes = [
         element: <AuthorPage />, 
         loader: authorPageLoader,
         children: [
-          { path: "/author", element: <DraftList />}
+          { path: "/author", element: <DraftList /> },
+          { path: "/author/edit/:postid", element: <EditPostPage />, loader: postLoader },
         ]
       },
       { path: "/author/post", element: <PostForm /> },
