@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
 import { Data } from "./Page";
+import { Link } from "react-router-dom";
 
-const PostForm = function () {
+const CreatePostForm = function () {
   const [title, setTitle] = useState("");
   const [subheader, setSubheader] = useState("");
   const [body, setBody] = useState("");
@@ -24,7 +25,6 @@ const PostForm = function () {
     data.append("subheader", subheader);
     data.append("body", body);
     data.append("categories", JSON.stringify(selectedCategories));
-    data.append("isPublished", false);
     data.append("image", file);
     try {
       const response = await fetch(
@@ -71,9 +71,10 @@ const PostForm = function () {
         ))}
       </fieldset>
       {errors && errors.map((error) => <p key={error.msg}>{error.msg}</p>)}
+      <Link to="/author"><button type="button">Cancel</button></Link>
       <button type="submit">Submit</button>
     </form>
   );
 };
 
-export default PostForm;
+export default CreatePostForm;

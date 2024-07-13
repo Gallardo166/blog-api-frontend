@@ -6,6 +6,7 @@ import styles from "../styles/CommentSection.module.css";
 
 const CommentSection = function ({ postid, comments }) {
   const [commentBody, setCommentBody] = useState("");
+  const [isCommenting, setIsCommenting] = useState(false);
   const { user } = useContext(Data);
 
   const handleClick = async function(e) {
@@ -36,11 +37,11 @@ const CommentSection = function ({ postid, comments }) {
     <section className={styles.commentSection}>
       {user ?
         <div className={styles.commentInput}>
-          <textarea className={styles.input} value={commentBody} placeholder="Write a comment..." onChange={(e) => setCommentBody(e.target.value)}></textarea>
-          <div className={styles.buttons}>
+          <textarea onFocus={() => setIsCommenting(true)} onBlur={() => setIsCommenting(false)} className={styles.input} value={commentBody} placeholder="Write a comment..." onChange={(e) => setCommentBody(e.target.value)}></textarea>
+          {isCommenting && <div className={styles.buttons}>
             <button className={styles.cancel} onClick={() => setCommentBody("")}>Cancel</button>
-            <button className={styles.send} onClick={(e) => handleClick(e)} disabled={!commentBody}>Send</button>
-          </div>
+            <button className={styles.send} onMouseDown={(e) => e.preventDefault()} onClick={(e) => handleClick(e)} disabled={!commentBody}>Send</button>
+          </div>}
         </div> :
         <p>Log in to comment</p>
       }

@@ -6,11 +6,11 @@ import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import Blog from "./components/Blog";
 import Post from "./components/Post";
-import PostForm from "./components/PostForm";
+import CreatePostForm from "./components/CreatePostForm";
 import Profile from "./components/Profile";
 import AuthorPage from "./components/AuthorPage";
 import DraftList from "./components/DraftList";
-import EditPostPage from "./components/EditPostPage";
+import EditPostForm from "./components/EditPostForm";
 
 const routes = [
   {
@@ -31,10 +31,10 @@ const routes = [
         loader: authorPageLoader,
         children: [
           { path: "/author", element: <DraftList /> },
-          { path: "/author/edit/:postid", element: <EditPostPage />, loader: postLoader },
+          { path: "/author/edit/:postid", element: <EditPostForm />, loader: postLoader },
+          { path: "/author/create", element: <CreatePostForm /> },
         ]
       },
-      { path: "/author/post", element: <PostForm /> },
     ],
   },
 ];

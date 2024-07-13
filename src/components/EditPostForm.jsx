@@ -2,7 +2,7 @@ import { Link, useLoaderData} from "react-router-dom";
 import { useContext, useState } from "react";
 import { Data } from "./Page";
 
-const EditPostPage = function() {
+const EditPostForm = function() {
   const { post } = useLoaderData();
   const { categories } = useContext(Data);
   const [title, setTitle] = useState(post.title);
@@ -86,7 +86,7 @@ const EditPostPage = function() {
           ))}
         </fieldset>
         {errors && errors.map((error) => <p key={error.msg}>{error.msg}</p>)}
-        <Link to="/author"><button id="cancel">Cancel</button></Link>
+        <Link to="/author"><button type="button">Cancel</button></Link>
         <button type="submit" id="save">Save</button>
         {!post.isPublished && <button type="submit" id="publish">Save and Publish</button>}
       </form>}
@@ -94,4 +94,4 @@ const EditPostPage = function() {
   )
 }
 
-export default EditPostPage;
+export default EditPostForm;

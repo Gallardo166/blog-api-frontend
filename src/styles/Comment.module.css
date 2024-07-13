@@ -21,3 +21,8 @@
   margin: 4px 0 24px 0;
   white-space: pre-wrap;
 }
+
+.modal {
+  position: absolute;
+  top: 30%;
+}

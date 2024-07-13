@@ -26,7 +26,7 @@ const Sidebar = function ({ user, categories, handleSidebarOpen, sidebarOpen }) 
       <button className={styles.closeButton} onClick={() => handleSidebarOpen(false)}><Icon path={mdiClose} size={1.2} /></button>
       <div className={styles.sidebarContainer}>
         <Link to={user ? (user.status === "author" ? "/author" : "/blog") : "/"} onClick={() => handleSidebarOpen(false)}>Home</Link>
-        {user.status === "author" && <Link to="/blog" onClick={() => handleSidebarOpen(false)}>Blog</Link>}
+        {user && user.status === "author" && <Link to="/blog" onClick={() => handleSidebarOpen(false)}>Blog</Link>}
         <p className={styles.categories}>Categories:</p>
         <div className={styles.categoriesContainer}>
           {categories &&
