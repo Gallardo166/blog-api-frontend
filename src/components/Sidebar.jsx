@@ -25,7 +25,8 @@ const Sidebar = function ({ user, categories, handleSidebarOpen, sidebarOpen }) 
     <nav className={`${styles.sidebar} ${sidebarOpen ? styles.open : styles.closed}`}>
       <button className={styles.closeButton} onClick={() => handleSidebarOpen(false)}><Icon path={mdiClose} size={1.2} /></button>
       <div className={styles.sidebarContainer}>
-        <Link to={user ? "/blog" : "/"} onClick={() => handleSidebarOpen(false)}>Home</Link>
+        <Link to={user ? (user.status === "author" ? "/author" : "/blog") : "/"} onClick={() => handleSidebarOpen(false)}>Home</Link>
+        {user.status === "author" && <Link to="/blog" onClick={() => handleSidebarOpen(false)}>Blog</Link>}
         <p className={styles.categories}>Categories:</p>
         <div className={styles.categoriesContainer}>
           {categories &&
@@ -41,7 +42,7 @@ const Sidebar = function ({ user, categories, handleSidebarOpen, sidebarOpen }) 
             <Link to={`/profile/${user._id}`} onClick={() => handleSidebarOpen(false)}>Profile</Link>
             <Link to="/" onClick={(e) => {
               handleClick(e);
-              handleSidebarOpen();
+              handleSidebarOpen(false);
             }}>
               Log Out
             </Link>
@@ -61,6 +62,7 @@ Sidebar.propTypes = {
   user: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     username: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
   }),
   categories: PropTypes.arrayOf(
     PropTypes.shape({

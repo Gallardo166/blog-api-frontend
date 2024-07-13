@@ -25,7 +25,10 @@ const Login = function () {
       );
       const resJson = await response.json();
       localStorage.setItem("token", resJson.token);
-      location.replace("/blog");
+      if (resJson.status === "author") {
+        return location.replace("/author");
+      }
+      location.replace("/blog")
     } catch (err) {
       setUsername("");
       setPassword("");

@@ -44,7 +44,7 @@ const pageLoader = async () => {
 const blogLoader = async () => {
   try {
     const response = await fetch(
-      import.meta.env.DEV ? "http://localhost:3000/posts" : "",
+      import.meta.env.DEV ? "http://localhost:3000/posts/published" : "",
       {
         method: "GET",
         mode: "cors",
@@ -118,4 +118,28 @@ const profileLoader = async function({ params }) {
   }
 };
 
-export { pageLoader, blogLoader, postLoader, profileLoader }
+const authorPageLoader = async function() {
+  const token = localStorage.getItem("token");
+  if (token) {
+    try {
+      const response = await fetch(
+        import.meta.env.DEV ? "http://localhost:3000/posts" : "",
+        {
+          method: "GET",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `bearer ${token}`,
+          }
+        },
+      );
+      throwError(response);
+      return response.json();
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
+  return { posts: null };
+};
+
+export { pageLoader, blogLoader, postLoader, profileLoader, authorPageLoader }
