@@ -1,13 +1,36 @@
 import PropTypes from "prop-types";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthorContext } from "./AuthorPage";
 import { Link } from "react-router-dom";
+import DeleteModal from "./DeleteModal";
 
 const DraftPreview = function ({ post }) {
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const { handlePublishDraft, handleUnpublishDraft } = useContext(AuthorContext);
+
+  const handleDelete = async function() {
+    const token = localStorage.getItem("token");
+    try {
+      await fetch(
+        import.meta.env.DEV ? `http://localhost:3000/posts/${post._id}` : "",
+        {
+          method: "DELETE",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `bearer ${token}`
+          }
+        }
+      );
+      location.reload();
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <div>
+      <DeleteModal isOpen={deleteModalOpen} setDeleteModalOpen={setDeleteModalOpen} handleDelete={handleDelete} />
       <img src={post.imageurl} />
       <div>
         <p>{post.title}</p>
@@ -28,6 +51,9 @@ const DraftPreview = function ({ post }) {
         {post.isPublished ? "Unpublish" : "Publish"}
       </button>
       <Link to={`/author/edit/${post._id}`}>Edit</Link>
+      <button onClick={() => {
+        setDeleteModalOpen(true);
+        }}>Delete</button>
     </div>
   );
 };

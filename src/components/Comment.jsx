@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import styles from "../styles/Comment.module.css";
 import calculate from "../calculateDate";
 import Icon from "@mdi/react";
+import DeleteModal from "./DeleteModal";
 import { mdiDotsVertical } from "@mdi/js";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Data } from "./Page";
@@ -9,15 +10,16 @@ import { Data } from "./Page";
 const Comment = function({ comment }) {
   const [actionsOpen, setActionsOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [commentBody, setCommentBody] = useState(comment.body);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const { user } = useContext(Data);
   const actionsModal = useRef(null);
   const actionsButton = useRef(null);
+  const deleteModal = useRef(null);
 
   useEffect(() => {
     document.addEventListener("mousedown", (e) => {
-      if (actionsModal.current && !actionsModal.current.contains(e.target) && !actionsButton.current.contains(e.target)) setActionsOpen(false);
+      if (actionsModal.current && !actionsModal.current.contains(e.target) && !actionsButton.current.contains(e.target) && !deleteModal.current.contains(e.target)) setActionsOpen(false);
     });
   }, [actionsOpen])
 
@@ -62,15 +64,11 @@ const Comment = function({ comment }) {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   return (
     <div className={styles.comment}>
-      {deleteModalOpen && <dialog className={styles.modal} open>
-        <p>Are you sure?</p>
-        <button onClick={() => setDeleteModalOpen(false)}>Cancel</button>
-        <button onClick={handleDelete}>Delete</button>
-      </dialog>}
+      <DeleteModal isOpen={deleteModalOpen} setDeleteModalOpen={setDeleteModalOpen} handleDelete={handleDelete} />
       <div className={styles.top}>
         <p className={styles.username}>{comment.user.username}</p>
         <p className={styles.date}>{calculate(comment.date)}</p>

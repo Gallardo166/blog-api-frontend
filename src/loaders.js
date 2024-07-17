@@ -15,9 +15,11 @@ const pageLoader = async () => {
           },
         }
       );
-      throwError(response);
-      const resJson =  await response.json();
-      user = resJson.user;
+      if (response.status !== 401) {
+        throwError(response);
+        const resJson =  await response.json();
+        user = resJson.user;
+      }
     } catch (err) {
       console.log(err);
       throw new Error(err + ", please try again.");
