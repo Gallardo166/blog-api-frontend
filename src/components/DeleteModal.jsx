@@ -22,7 +22,7 @@ const DeleteModal = function({ isOpen, setDeleteModalOpen, handleDelete }) {
 };
 
 DeleteModal.propTypes = {
-  isOpen: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
   setDeleteModalOpen: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
 }
