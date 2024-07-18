@@ -1,6 +1,7 @@
 import { Link, useLoaderData } from "react-router-dom";
 import { useContext, useState } from "react";
 import { Data } from "./Page";
+import styles from "../styles/PostForm.module.css";
 
 const EditPostForm = function () {
   const { post } = useLoaderData();
@@ -58,7 +59,6 @@ const EditPostForm = function () {
         setErrors(resJson.errors);
         return;
       }
-      setLoading(false);
       location.replace("/author");
     } catch (err) {
       console.log(err);
@@ -68,11 +68,10 @@ const EditPostForm = function () {
   return (
     <>
       {loading ? (
-        <p>Loading...</p>
+        <p className={styles.loading}>Loading...</p>
       ) : (
         <form
           onSubmit={(e) => {
-            console.log(e);
             e.preventDefault();
             handleSubmit(e.nativeEvent.submitter.id);
           }}
@@ -85,6 +84,9 @@ const EditPostForm = function () {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
+          {errors && errors.filter((error) => error.path==="title").map((error) => (
+            <p className={styles.error} key={error.msg}>{error.msg}</p>
+          ))}
           <label htmlFor="subheader">Subheader</label>
           <input
             type="text"
@@ -95,11 +97,15 @@ const EditPostForm = function () {
           />
           <label htmlFor="body">Body</label>
           <textarea
+            className={styles.body}
             name="body"
             id="body"
             value={body}
             onChange={(e) => setBody(e.target.value)}
           ></textarea>
+          {errors && errors.filter((error) => error.path==="body").map((error) => (
+            <p className={styles.error} key={error.msg}>{error.msg}</p>
+          ))}
           <label htmlFor="image">Image</label>
           <input
             type="file"
@@ -110,7 +116,7 @@ const EditPostForm = function () {
           <fieldset>
             <legend>Categories:</legend>
             {categories.map((category) => (
-              <div key={category._id}>
+              <div className={styles.category} key={category._id}>
                 <input
                   checked={selectedCategories.includes(category._id)}
                   type="checkbox"
@@ -123,18 +129,19 @@ const EditPostForm = function () {
               </div>
             ))}
           </fieldset>
-          {errors && errors.map((error) => <p key={error.msg}>{error.msg}</p>)}
-          <Link to="/author">
-            <button type="button">Cancel</button>
-          </Link>
-          <button type="submit" id="save">
-            Save
-          </button>
-          {!post.isPublished && (
-            <button type="submit" id="publish">
-              Save and Publish
+          <div className={styles.buttons}>
+            <Link to="/author">
+              <button type="button">Cancel</button>
+            </Link>
+            <button type="submit" id="save">
+              Save
             </button>
-          )}
+            {!post.isPublished && (
+              <button type="submit" id="publish">
+                Save and Publish
+              </button>
+            )}
+          </div>
         </form>
       )}
     </>

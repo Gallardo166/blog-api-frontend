@@ -1,0 +1,37 @@
+input, textarea, .buttons button {
+  font-family: libre-baskerville;
+}
+
+.body {
+  min-height: 240px;
+  resize: vertical;
+}
+
+.category {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.buttons {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.buttons button {
+  width: 160px;
+  padding: 8px;
+}
+
+.error {
+  margin: 0;
+  color: rgb(231, 102, 102);
+}
+
+.loading {
+  margin-top: 24px;
+  text-align: center;
+}
