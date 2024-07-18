@@ -1,0 +1,104 @@
+.container {
+  padding: 16px 16px 0 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.top {
+  display: flex;
+  gap: 16px;
+}
+
+.image {
+  width: 50%;
+  aspect-ratio: 5/3;
+  object-fit: cover;
+}
+
+.categories {
+  display: flex;
+  gap: 12px;
+}
+
+.category {
+  padding: 2px 4px;
+  border: 1px solid white;
+  background-color: black;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.title {
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.subheader {
+  position: relative;
+  margin: 0;
+  text-align:justify;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.unpublishButton, .publishButton {
+  font-family: libre-baskerville;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 6px 12px;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.unpublishButton {
+  background-color: rgb(216, 101, 132);
+}
+
+.unpublishButton:hover {
+  background-color: rgb(180, 75, 103);
+}
+
+.publishButton {
+  background-color: rgb(79, 168, 90);
+}
+
+.publishButton:hover {
+  background-color: rgb(61, 143, 71);
+}
+
+a {
+  display: flex;
+}
+
+.right {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+button:hover {
+  cursor: pointer;
+}

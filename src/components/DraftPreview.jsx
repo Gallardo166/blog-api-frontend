@@ -3,12 +3,16 @@ import { useContext, useState } from "react";
 import { AuthorContext } from "./AuthorPage";
 import { Link } from "react-router-dom";
 import DeleteModal from "./DeleteModal";
+import Icon from "@mdi/react";
+import { mdiPencil, mdiDelete } from "@mdi/js";
+import styles from "../styles/DraftPreview.module.css";
 
 const DraftPreview = function ({ post }) {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const { handlePublishDraft, handleUnpublishDraft } = useContext(AuthorContext);
+  const { handlePublishDraft, handleUnpublishDraft } =
+    useContext(AuthorContext);
 
-  const handleDelete = async function() {
+  const handleDelete = async function () {
     const token = localStorage.getItem("token");
     try {
       await fetch(
@@ -18,42 +22,72 @@ const DraftPreview = function ({ post }) {
           mode: "cors",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `bearer ${token}`
-          }
+            Authorization: `bearer ${token}`,
+          },
         }
       );
       location.reload();
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   return (
     <div>
-      <DeleteModal isOpen={deleteModalOpen} setDeleteModalOpen={setDeleteModalOpen} handleDelete={handleDelete} />
-      <img src={post.imageurl} />
-      <div>
-        <p>{post.title}</p>
-        <p>{post.subheader}</p>
-        {post.categories.map((category) => (
-          <p key={category._id}>{category.name}</p>
-        ))}
-        <p>{post.isPublished ? "Published" : "Draft"}</p>
+      <DeleteModal
+        isOpen={deleteModalOpen}
+        setDeleteModalOpen={setDeleteModalOpen}
+        handleDelete={handleDelete}
+      />
+      <div className={styles.container}>
+        <div className={styles.top}>
+          <img className={styles.image} src={post.imageurl} />
+          <div>
+            <div className={styles.categories}>
+              {post.categories.map((category) => (
+                <p className={styles.category} key={category._id}>
+                  {category.name}
+                </p>
+              ))}
+            </div>
+            <h2 className={styles.title}>{post.title}</h2>
+            <p className={styles.subheader}>{post.subheader}</p>
+          </div>
+        </div>
+        <div className={styles.bottom}>
+          <div className={styles.left}>
+            <p>{post.isPublished ? "Published" : "Draft"}</p>
+            <button
+              className={
+                post.isPublished ? styles.unpublishButton : styles.publishButton
+              }
+              onClick={() => {
+                if (post.isPublished) {
+                  return handleUnpublishDraft(post);
+                }
+                handlePublishDraft(post);
+              }}
+            >
+              {post.isPublished ? "Unpublish" : "Publish"}
+            </button>
+          </div>
+          <div className={styles.right}>
+            <Link to={`/author/edit/${post._id}`}>
+              <button className={styles.editButton}>
+                <Icon path={mdiPencil} size={1} />
+              </button>
+            </Link>
+            <button
+              className={styles.deleteButton}
+              onClick={() => {
+                setDeleteModalOpen(true);
+              }}
+            >
+              <Icon path={mdiDelete} size={1} />
+            </button>
+          </div>
+        </div>
       </div>
-      <button
-        onClick={() => {
-          if (post.isPublished) {
-            return handleUnpublishDraft(post);
-          }
-          handlePublishDraft(post);
-        }}
-      >
-        {post.isPublished ? "Unpublish" : "Publish"}
-      </button>
-      <Link to={`/author/edit/${post._id}`}>Edit</Link>
-      <button onClick={() => {
-        setDeleteModalOpen(true);
-        }}>Delete</button>
     </div>
   );
 };

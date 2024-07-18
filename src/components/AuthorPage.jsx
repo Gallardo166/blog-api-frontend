@@ -36,12 +36,6 @@ const AuthorPage = function() {
 
   const handleUnpublishDraft = async function(post) {
     const token = localStorage.getItem("token");
-    const data = new FormData();
-    data.append("title", post.title);
-    data.append("subheader", post.subheader);
-    data.append("body", post.body);
-    data.append("categories", JSON.stringify(post.categories));
-    data.append("isPublished", false);
     try {
       await fetch(
         import.meta.env.DEV ? `http://localhost:3000/posts/${post._id}` : null,
@@ -57,6 +51,7 @@ const AuthorPage = function() {
             subheader: post.subheader,
             body: post.body,
             categories: JSON.stringify(post.categories),
+            isPublished: false,
           }),
         }
       );
