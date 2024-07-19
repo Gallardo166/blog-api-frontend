@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
+import styles from "../styles/DeleteModal.module.css";
 
 const DeleteModal = function({ isOpen, setDeleteModalOpen, handleDelete }) {
   const deleteModal = useRef(null);
@@ -13,10 +14,12 @@ const DeleteModal = function({ isOpen, setDeleteModalOpen, handleDelete }) {
   }, [isOpen]);
 
   return (
-    <dialog ref={deleteModal}>
+    <dialog className={styles.modal} ref={deleteModal}>
       <p>Are you sure?</p>
-        <button onClick={() => setDeleteModalOpen(false)}>Cancel</button>
-        <button onClick={handleDelete}>Delete</button>
+      <div className={styles.buttons}>
+        <button className={styles.cancelButton} onClick={() => setDeleteModalOpen(false)}>Cancel</button>
+        <button className={styles.deleteButton} onClick={handleDelete}>Delete</button>
+      </div>
     </dialog>
   )
 };

@@ -35,3 +35,7 @@ input, textarea, .buttons button {
   margin-top: 24px;
   text-align: center;
 }
+
+a:hover {
+  text-decoration: none;
+}

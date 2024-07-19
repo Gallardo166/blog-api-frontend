@@ -1,0 +1,33 @@
+.modal {
+  background-color: rgb(49, 49, 49);
+}
+
+.modal::backdrop {
+  background-color: black;
+  opacity: 0.4;
+}
+
+.buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.cancelButton, .deleteButton {
+  font-family: libre-baskerville;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 6px 12px;
+  border: none;
+}
+
+.deleteButton {
+  background-color: rgb(216, 101, 132);
+}
+
+.deleteButton:hover {
+  background-color: rgb(180, 75, 103);
+}
+
+.cancelButton:hover {
+  background-color: rgb(117, 117, 117);
+}
