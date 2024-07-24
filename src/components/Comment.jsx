@@ -15,11 +15,10 @@ const Comment = function({ comment }) {
   const { user } = useContext(Data);
   const actionsModal = useRef(null);
   const actionsButton = useRef(null);
-  const deleteModal = useRef(null);
 
   useEffect(() => {
     document.addEventListener("mousedown", (e) => {
-      if (actionsModal.current && !actionsModal.current.contains(e.target) && !actionsButton.current.contains(e.target) && !deleteModal.current.contains(e.target)) setActionsOpen(false);
+      if (actionsModal.current && !actionsModal.current.contains(e.target) && !actionsButton.current.contains(e.target)) setActionsOpen(false);
     });
   }, [actionsOpen])
 
@@ -70,29 +69,42 @@ const Comment = function({ comment }) {
     <div className={styles.comment}>
       <DeleteModal isOpen={deleteModalOpen} setDeleteModalOpen={setDeleteModalOpen} handleDelete={handleDelete} />
       <div className={styles.top}>
-        <p className={styles.username}>{comment.user.username}</p>
-        <p className={styles.date}>{calculate(comment.date)}</p>
-        {actionsOpen && 
-          <div ref={actionsModal}>
-            {user.status === "author" && <button onClick={() => setIsEditing(true)}>Edit</button>}
-            <button onClick={() => setDeleteModalOpen(true)}>Delete</button>
+        <div className={styles.left}>
+          <p className={styles.username}>{comment.user.username}</p>
+          <p className={styles.date}>{calculate(comment.date)}</p>
+        </div>
+        {actionsOpen &&
+          <div className={styles.modal} ref={actionsModal}>
+            {user.status === "author" && (
+              <>
+                <button className={styles.editButton} onClick={() => {
+                  setIsEditing(true);
+                  setActionsOpen(false);
+                }}>Edit</button>
+              </>
+            )}
+            <button className={styles.deleteButton} onClick={() => {
+              setDeleteModalOpen(true);
+              setActionsOpen(false);
+            }}>Delete</button>
           </div>
         }
-        {(user._id === comment.user._id || user.status === "author") && <Icon 
+        {user && (user._id === comment.user._id || user.status === "author") && <Icon
+        className={styles.actionsButton}
           ref={actionsButton}
-          path={mdiDotsVertical} 
-          size={1} 
+          path={mdiDotsVertical}
+          size={1}
           onClick={() => setActionsOpen(actionsOpen => !actionsOpen)}
         />}
       </div>
       {isEditing ? (
         <>
           <input onChange={(e) => setCommentBody(e.target.value)} value={commentBody}></input>
-          <button onClick={() => {
+          <button className={styles.cancelEdit} onClick={() => {
             setCommentBody(comment.body);
             setIsEditing(false);
           }}>Cancel</button>
-          <button onClick={handleEdit} disabled={commentBody === comment.body || commentBody === ""}>Save</button>
+          <button className={styles.saveEdit} onClick={handleEdit} disabled={commentBody === comment.body || commentBody === ""}>Save</button>
         </>
       ) : <p className={styles.body}>{comment.body}</p>
       }

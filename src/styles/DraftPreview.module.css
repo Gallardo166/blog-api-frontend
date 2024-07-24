@@ -5,18 +5,23 @@
 }
 
 .top {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
 
+.imageContainer {
+  align-self: self-start;
+}
+
 .image {
-  width: 50%;
+  width: 100%;
   aspect-ratio: 5/3;
   object-fit: cover;
 }
 
 .categories {
-  max-height: 60px;
+  max-height: 54px;
   display: flex;
   gap: 12px;
   flex-wrap: wrap;

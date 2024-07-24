@@ -1,0 +1,48 @@
+.profilePage {
+  padding:16px;
+}
+
+p {
+  margin: 0;
+}
+
+hr {
+  margin: 16px 0;
+}
+
+.top {
+  margin-bottom: 4px;
+  font-size: 0.8rem;
+  color: rgb(200, 200, 200);
+}
+
+.bottom, .buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.editButton, .cancelEdit, .saveEdit {
+  border: none;
+  padding: 0 12px;
+  border-radius: 45px;
+  font-family: libre-baskerville;
+}
+
+.cancelEdit {
+  background: none;
+  padding: 0;
+}
+
+.editButton:hover {
+  background-color: rgb(46, 146, 223);
+}
+
+.saveEdit:not(:disabled):hover {
+  background-color: rgb(166, 101, 216);
+}
+
+.comments {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}

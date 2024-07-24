@@ -41,7 +41,7 @@ const DraftPreview = function ({ post }) {
       />
       <div className={styles.container}>
         <div className={styles.top}>
-          <img className={styles.image} src={post.imageurl} />
+          <Link className={styles.imageContainer} to={`/blog/${post._id}`}><img className={styles.image} src={post.imageurl} /></Link>
           <div>
             <div className={styles.categories}>
               {post.categories.map((category) => (

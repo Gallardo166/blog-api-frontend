@@ -1,8 +1,14 @@
 .comment {
+  position: relative;
   font-size: 0.9rem;
 }
 
 .top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left {
   display: flex;
   gap: 8px;
 }
@@ -17,7 +23,41 @@
   margin: 4px 0;
 }
 
+.actionsButton:hover {
+  cursor: pointer;
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  right: 24px;
+  border-radius: 5px;
+  background-color: rgb(34, 34, 34);
+  display: flex;
+  flex-direction: column;
+}
+
+.editButton, .deleteButton {
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  font-family: libre-baskerville;
+}
+
+.editButton:hover, .deleteButton:hover {
+  background-color: rgb(76, 76, 76);
+}
+
 .body {
   margin: 4px 0 24px 0;
   white-space: pre-wrap;
+}
+
+.cancelEdit, .saveEdit {
+  font-family: libre-baskerville;
+}
+
+.cancelEdit {
+  background: none;
+  border: none;
 }

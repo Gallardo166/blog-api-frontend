@@ -3,6 +3,7 @@ import Comment from "./Comment";
 import PropTypes from "prop-types";
 import { Data } from "./Page";
 import styles from "../styles/CommentSection.module.css";
+import { Link } from "react-router-dom";
 
 const CommentSection = function ({ postid, comments }) {
   const [commentBody, setCommentBody] = useState("");
@@ -43,7 +44,7 @@ const CommentSection = function ({ postid, comments }) {
             <button className={styles.send} onMouseDown={(e) => e.preventDefault()} onClick={(e) => handleClick(e)} disabled={!commentBody}>Send</button>
           </div>}
         </div> :
-        <p>Log in to comment</p>
+        <p><Link className={styles.link} to="/login">Log in</Link> or <Link className={styles.link} to="/signup">Sign up</Link> to comment</p>
       }
       {comments.length ? (
         comments.map((comment) => (<Comment key={comment._id} comment={comment} />))

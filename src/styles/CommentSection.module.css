@@ -52,3 +52,9 @@
   background-color: rgb(166, 101, 216);
   cursor: pointer;
 }
+
+.link {
+  display: inline-block;
+  font-size: 1rem;
+  text-decoration: underline;
+}
